@@ -2,29 +2,28 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-type User = {
-  id: number;
-  name: string;
-};
-
-// Client component
+// Componente principal
 const Home = () => {
-  const [data, setData] = useState<User[]>([]);
+  // Estado para guardar la información de los usuarios
+  const [data, setData] = useState([]);
 
+  // useEffect para hacer la solicitud API cuando el componente se monte
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const res = await fetch("http://localhost:5001/api/v1/users");
         const resData = await res.json();
         setData(resData.users);
-        return resData;
       } catch (error) {
-        throw error;
+        console.error("Hubo un error al obtener los usuarios:", error);
       }
     };
+
+    // Llamar a la función fetchUsers
     fetchUsers();
   }, []);
 
+  // Renderizar el componente
   return (
     <section className="p-4 bg-gray-900 text-white min-h-screen">
       <div className="container mx-auto">
