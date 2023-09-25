@@ -5,8 +5,7 @@ const getUsers = ((req, res) => {
     const users = [
       { id: 1, name: "Miguel" },
       { id: 2, name: "Estefania" },
-      { id: 3, name: "Manuel" },
-      { id: 4, name: "Rubén" },
+      { id: 3, name: "Rubén" },
     ];
 
     return res.status(200).json({ users });
