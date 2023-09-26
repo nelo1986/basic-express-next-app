@@ -1,20 +1,14 @@
+import model from '../models/model.js'
 
-
-const getUsers = ((req, res) => {
+const getBosses = async (req, res) => {
   try {
-    const users = [
-      { id: 1, name: "Miguel" },
-      { id: 2, name: "Estefania" },
-      { id: 3, name: "Rubén" },
-    ];
-
+    const users = await model.getBossUsers('Boss')
     return res.status(200).json({ users });
-  } catch (error) {
-    throw error;
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Error al obtener datos')
   }
-})
-
-export default {
-  getUsers
 }
-
+export default {
+  getBosses
+}

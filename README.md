@@ -1,10 +1,12 @@
-# Despliegue de un entorno de eesarrollo con Node.js (Express.js), MySQL y Adminer usando Docker-Compose
+# Despliegue de un entorno de eesarrollo con Node.js (Express.js), MySQL, Adminer y NextJS usando Docker-Compose
 
-Este proyecto permite desplegar un entorno de desarrollo que consta de tres contenedores:
+Este proyecto permite desplegar un entorno de desarrollo que consta de dos contenedores y dos aplicaciones independientes
 
 - **MySQL:** Base de datos
 - **Adminer:** Herramienta para administración de la base de datos
-- **app:** Aplicación básica usando Node.js con Express.js
+- **Aplicación backend:** app básica con Express JS que hace una consulta a la base de datos.
+- **Aplicación frontend:** app básica con NextJS que muestra los datos de la consulta
+
 
 ## Tabla de Contenidos
 
@@ -60,13 +62,28 @@ git pull origin main
 docker-compose down
 docker-compose up --build -d 
 ```
+Una vez tenemos el contenedor con la base de datos, ya podemos ejecutar la aplicacion backend y frontend.
+
+Desde el directorio backend:
+
+```node
+  nodemon app.js
+```
+Desde el directorio frontend:
+```node
+  npm start
+```
+Backend
+
+
 
 ## Acceso a los servicios
 
 Para acceder a los servicios, sigue las siguientes URLs desde tu navegador:
 
 - **Adminer**: [http://localhost:8080](http://localhost:8080)
-- **app**: [http://localhost:3000](http://localhost:3000)
+- **front**: [http://localhost:3000](http://localhost:3000)
+- **back**: [http://localhost:5001](http://localhost:3000)
 
 ### Datos para Adminer
 
@@ -78,10 +95,3 @@ Para acceder a la base de datos mediante Adminer, utiliza los siguientes datos:
 - **Password**: ioc
 - **Database**: gestores
 
-## Nota Importante
-
-Dentro del contenedor `app` se ejecuta el proceso `nodemon`. Si instalas un nuevo módulo o agregas nuevos directorios será necesario ejecutar los siguientes comandos para reiniciar el contenedor:
-
-```bash
-docker-compose down
-docker-compose up --build -d 
